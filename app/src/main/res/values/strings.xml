@@ -3,4 +3,7 @@
     <string name="title_home">Главная</string>
     <string name="title_cities">Города</string>
     <string name="title_info">О приложении</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="empty_search">Город не введён</string>
 </resources>

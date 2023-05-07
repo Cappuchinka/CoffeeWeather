@@ -22,4 +22,13 @@
         android:name="ru.kapuchinka.coffeeweather.ui.notifications.NotificationsFragment"
         android:label="@string/title_info"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="ru.kapuchinka.coffeeweather.ui.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 </navigation>

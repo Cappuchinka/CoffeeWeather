@@ -6,7 +6,7 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="coffee_main">#6F4E37</color>
-    <color name="coffee_variant">#9A7052</color>
+    <color name="coffee_dark">#55361F</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
