@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">CoffeeWeather</string>
+    <string name="title_home">Главная</string>
+    <string name="title_cities">Города</string>
+    <string name="title_info">О приложении</string>
+</resources>
