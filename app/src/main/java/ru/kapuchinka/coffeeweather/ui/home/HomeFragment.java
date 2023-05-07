@@ -1,5 +1,6 @@
 package ru.kapuchinka.coffeeweather.ui.home;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -53,7 +55,7 @@ public class HomeFragment extends Fragment {
                 if(fieldSearchCity.getText().toString().trim().equals(""))
                     Toast.makeText(getActivity(), R.string.empty_search, Toast.LENGTH_SHORT).show();
                 else {
-                    String city = fieldSearchCity.getText().toString();
+                    String city = fieldSearchCity.getText().toString().trim();
                     String key = "c50ba949b50e3b521271fb2b6a25f0e5";
                     String url = String.format("https://api.openweathermap.org/data/2.5/weather?q=%s&APPID=%s&units=metric&lang=ru", city, key);
 
@@ -120,8 +122,20 @@ public class HomeFragment extends Fragment {
 
             try {
                 JSONObject jsonObject = new JSONObject(result);
-                Double temp = jsonObject.getJSONObject("main").getDouble("temp");
-                searchResult.setText(temp.toString());
+                double temp = jsonObject.getJSONObject("main").getDouble("temp");
+                double tempFeelsLike = jsonObject.getJSONObject("main").getDouble("feels_like");
+                double tempMin = jsonObject.getJSONObject("main").getDouble("temp_min");
+                double tempMax = jsonObject.getJSONObject("main").getDouble("temp_max");
+                String weatherDescription = jsonObject.getJSONArray("weather").getJSONObject(0).getString("description");
+                String city = jsonObject.getString("name");
+
+                String resultWeather = String.format("%s\n" +
+                        "%s, %.2f°C\n" +
+                        "Ощущается как %.2f°C\n" +
+                        "Минимальная температура %.2f°C\n" +
+                        "Максимальная температура %.2f°C\n", city, weatherDescription, temp, tempFeelsLike, tempMin, tempMax);
+
+                searchResult.setText(resultWeather);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
