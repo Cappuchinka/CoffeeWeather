@@ -129,8 +129,9 @@ public class HomeFragment extends Fragment {
                 String weatherDescription = jsonObject.getJSONArray("weather").getJSONObject(0).getString("description");
                 String city = jsonObject.getString("name");
 
+                @SuppressLint("DefaultLocale")
                 String resultWeather = String.format("%s\n" +
-                        "%s, %.2f°C\n" +
+                        "%s %.2f°C\n" +
                         "Ощущается как %.2f°C\n" +
                         "Минимальная температура %.2f°C\n" +
                         "Максимальная температура %.2f°C\n", city, weatherDescription, temp, tempFeelsLike, tempMin, tempMax);
