@@ -6,16 +6,20 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 public class DBHelper extends SQLiteOpenHelper {
 
+    private Context context;
+
     public DBHelper(Context context) {
         super(context, "cities.db", null, 1);
+        this.context = context;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE coffee_cities(" +
+        db.execSQL("CREATE TABLE cities(" +
                         "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "city_name TEXT UNIQUE" +
                 ")");
@@ -38,9 +42,10 @@ public class DBHelper extends SQLiteOpenHelper {
     public Boolean deleteCity(String name) {
         SQLiteDatabase DB = this.getWritableDatabase();
         @SuppressLint("Recycle")
-        Cursor cursor = DB.rawQuery("SELECT * FROM cities where name = ?", new String[]{name});
+        Cursor cursor = DB.rawQuery("SELECT * FROM cities where city_name = ?", new String[]{name});
         if (cursor.getCount() > 0) {
-            long result = DB.delete("cities", "name=?", new String[]{name});
+            long result = DB.delete("cities", "city_name=?", new String[]{name});
+            Toast.makeText(context, "Город удалён", Toast.LENGTH_SHORT).show();
             return result != -1;
         } else {
             return false;

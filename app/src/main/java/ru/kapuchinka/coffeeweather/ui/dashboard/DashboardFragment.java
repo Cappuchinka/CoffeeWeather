@@ -56,7 +56,7 @@ public class DashboardFragment extends Fragment {
 
         getCitiesFromDataBases();
 
-        adapter = new CityAdapter(getContext(), getActivity(), cities);
+        adapter = new CityAdapter(getContext(), getActivity(), cities, DB);
         r_v_cities.setAdapter(adapter);
         r_v_cities.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -111,6 +111,7 @@ public class DashboardFragment extends Fragment {
                 else {
                     String newCity = newName.getText().toString().toUpperCase().trim();
                     DB.insertCityData(newCity);
+                    Toast.makeText(getActivity(), "Город добавлен", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
             }

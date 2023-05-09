@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import ru.kapuchinka.coffeeweather.DBHelper;
 import ru.kapuchinka.coffeeweather.R;
 
 public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
@@ -24,10 +25,13 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
     private Activity activity;
     private ArrayList<String> cities;
 
-    public CityAdapter(Context context, Activity activity, ArrayList<String> cities) {
+    private DBHelper DB;
+
+    public CityAdapter(Context context, Activity activity, ArrayList<String> cities, DBHelper DB) {
         this.context = context;
         this.activity = activity;
         this.cities = cities;
+        this.DB = DB;
     }
 
     @NonNull
@@ -46,7 +50,9 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
         holder.deleteCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String name = String.valueOf(cities.get(pos));
+                DB.deleteCity(name);
+                cities.remove(pos);
             }
         });
 
