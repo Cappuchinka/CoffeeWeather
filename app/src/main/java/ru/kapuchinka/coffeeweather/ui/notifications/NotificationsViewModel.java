@@ -10,7 +10,7 @@ public class NotificationsViewModel extends ViewModel {
 
     public NotificationsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Мобильное приложение о погоде.\n" +
+        mText.setValue("CoffeeWeather\n" +
                 "API: Open Weather Map\n" +
                 "База Данных: Sqlite\n" +
                 "\n" +

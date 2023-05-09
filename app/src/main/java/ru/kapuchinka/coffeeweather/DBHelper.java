@@ -10,12 +10,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBHelper extends SQLiteOpenHelper {
 
     public DBHelper(Context context) {
-        super(context, "CoffeeCity.db", null, 1);
+        super(context, "cities.db", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE cities(" +
+        db.execSQL("CREATE TABLE coffee_cities(" +
                         "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "city_name TEXT UNIQUE" +
                 ")");
@@ -47,9 +47,15 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    public Cursor getCities()
-    {
+    public Cursor getCities() {
+        String query = "SELECT * FROM cities";
         SQLiteDatabase DB = this.getWritableDatabase();
-        return DB.rawQuery("SELECT city_name FROM cities", null);
+        Cursor cursor = null;
+
+        if (DB != null) {
+            cursor = DB.rawQuery(query, null);
+        }
+
+        return cursor;
     }
 }

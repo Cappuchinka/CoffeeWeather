@@ -6,4 +6,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="empty_search">Город не введён</string>
+    <string name="info">CoffeeWeather\nAPI: Open Weather Map\nБаза Данных: Sqlite\nАвтор: Kapućinka</string>
+    <string name="enter_city">Введите город</string>
+    <string name="add_button">Добавить</string>
 </resources>
