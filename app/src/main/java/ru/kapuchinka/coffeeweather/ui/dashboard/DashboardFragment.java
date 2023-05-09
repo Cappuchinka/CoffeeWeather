@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -38,6 +41,7 @@ public class DashboardFragment extends Fragment {
     CityAdapter adapter;
     ArrayList<String> cities;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         DashboardViewModel dashboardViewModel =
@@ -48,8 +52,13 @@ public class DashboardFragment extends Fragment {
         DB = new DBHelper(getActivity());
         cities = new ArrayList<>();
         dialog = new Dialog(getContext());
+        r_v_cities = binding.rVCities;
 
         getCitiesFromDataBases();
+
+        adapter = new CityAdapter(getContext(), getActivity(), cities);
+        r_v_cities.setAdapter(adapter);
+        r_v_cities.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         addButtonCity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,9 +66,6 @@ public class DashboardFragment extends Fragment {
                 openAddDialog();
             }
         });
-
-//        adapter = new CityAdapter(getContext(), cities);
-//        r_v_cities.setAdapter(adapter);
 
         return binding.getRoot();
     }
@@ -70,6 +76,7 @@ public class DashboardFragment extends Fragment {
         binding = null;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void getCitiesFromDataBases() {
         Cursor cursor = DB.getCities();
 
@@ -103,6 +110,8 @@ public class DashboardFragment extends Fragment {
                     Toast.makeText(getActivity(), "Поле пустое!", Toast.LENGTH_SHORT).show();
                 else {
                     String newCity = newName.getText().toString().toUpperCase().trim();
+                    DB.insertCityData(newCity);
+                    dialog.dismiss();
                 }
             }
         });

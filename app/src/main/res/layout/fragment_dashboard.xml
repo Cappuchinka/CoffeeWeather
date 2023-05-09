@@ -20,8 +20,9 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/r_v_cities"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:listitem="@layout/item_city" />
+                android:layout_height="match_parent"
+                tools:listitem="@layout/item_city"
+                tools:itemCount="10"/>
         </ScrollView>
 
         <Button
