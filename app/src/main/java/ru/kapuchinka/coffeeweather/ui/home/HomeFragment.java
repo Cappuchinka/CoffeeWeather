@@ -15,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -53,7 +52,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(fieldSearchCity.getText().toString().trim().equals(""))
-                    Toast.makeText(getActivity(), R.string.empty_search, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.empty_field, Toast.LENGTH_SHORT).show();
                 else {
                     String city = fieldSearchCity.getText().toString().trim();
                     String key = "c50ba949b50e3b521271fb2b6a25f0e5";
@@ -126,7 +125,8 @@ public class HomeFragment extends Fragment {
                 double tempFeelsLike = jsonObject.getJSONObject("main").getDouble("feels_like");
                 double tempMin = jsonObject.getJSONObject("main").getDouble("temp_min");
                 double tempMax = jsonObject.getJSONObject("main").getDouble("temp_max");
-                String weatherDescription = jsonObject.getJSONArray("weather").getJSONObject(0).getString("description");
+                String weather = jsonObject.getJSONArray("weather").getJSONObject(0).getString("description");
+                String weatherDescription = weather.substring(0, 1).toUpperCase() + weather.substring(1).toLowerCase();
                 String city = jsonObject.getString("name");
 
                 @SuppressLint("DefaultLocale")

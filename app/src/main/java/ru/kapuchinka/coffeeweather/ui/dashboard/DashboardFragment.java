@@ -107,11 +107,11 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (newName.getText().toString().equals(""))
-                    Toast.makeText(getActivity(), "Поле пустое!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.empty_field, Toast.LENGTH_SHORT).show();
                 else {
                     String newCity = newName.getText().toString().toUpperCase().trim();
                     DB.insertCityData(newCity);
-                    Toast.makeText(getActivity(), "Город добавлен", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.added_city, Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
             }
