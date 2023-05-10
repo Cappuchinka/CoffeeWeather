@@ -4,33 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.dashboard.DashboardFragment"
-    android:layout_margin="8dp">
+    android:fillViewport="true"
+    tools:context=".ui.dashboard.DashboardFragment">
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/scrollViewCities"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="right"
-        android:orientation="vertical">
 
-        <ScrollView
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/r_v_cities"
             android:layout_width="match_parent"
-            android:layout_height="607dp">
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:visibility="visible"
+            tools:itemCount="10"
+            tools:listitem="@layout/item_city" />
+    </ScrollView>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/r_v_cities"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/item_city"
-                tools:itemCount="10"/>
-        </ScrollView>
+    <Button
+        android:id="@+id/buttonAddCity"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="end"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/coffee_main"
+        android:clickable="true"
+        android:elevation="10dp"
+        android:text="+"
+        app:cornerRadius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/buttonAddCity"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@color/coffee_main"
-            android:text="+"
-            app:cornerRadius="0dp" />
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
