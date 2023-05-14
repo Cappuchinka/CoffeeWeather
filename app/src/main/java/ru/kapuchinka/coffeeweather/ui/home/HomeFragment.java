@@ -36,10 +36,12 @@ public class HomeFragment extends Fragment {
     private EditText fieldSearchCity;
     private TextView searchResult;
 
+    HomeViewModel homeViewModel;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -48,18 +50,15 @@ public class HomeFragment extends Fragment {
         fieldSearchCity = binding.fieldSearchCity;
         searchResult = binding.searchResult;
 
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(fieldSearchCity.getText().toString().trim().equals(""))
-                    Toast.makeText(getActivity(), R.string.empty_field, Toast.LENGTH_SHORT).show();
-                else {
-                    String city = fieldSearchCity.getText().toString().trim();
-                    String key = "c50ba949b50e3b521271fb2b6a25f0e5";
-                    String url = String.format("https://api.openweathermap.org/data/2.5/weather?q=%s&APPID=%s&units=metric&lang=ru", city, key);
+        searchButton.setOnClickListener(v -> {
+            if(fieldSearchCity.getText().toString().trim().equals(""))
+                Toast.makeText(getActivity(), R.string.empty_field, Toast.LENGTH_SHORT).show();
+            else {
+                String city = fieldSearchCity.getText().toString().trim();
+                String key = "c50ba949b50e3b521271fb2b6a25f0e5";
+                String url = String.format("https://api.openweathermap.org/data/2.5/weather?q=%s&APPID=%s&units=metric&lang=ru", city, key);
 
-                    new GetData().execute(url);
-                }
+                new GetData().execute(url);
             }
         });
         return root;
@@ -74,7 +73,8 @@ public class HomeFragment extends Fragment {
     private class GetData extends AsyncTask<String, String, String> {
         protected void onPreExecute() {
             super.onPreExecute();
-            searchResult.setText("Ожидание...");
+            homeViewModel.setText("Ожидание...");
+            homeViewModel.getText().observe(getViewLifecycleOwner(), searchResult::setText);
         }
 
         @Override
@@ -136,7 +136,8 @@ public class HomeFragment extends Fragment {
                         "Минимальная температура %.2f°C\n" +
                         "Максимальная температура %.2f°C\n", city, weatherDescription, temp, tempFeelsLike, tempMin, tempMax);
 
-                searchResult.setText(resultWeather);
+                homeViewModel.setText(resultWeather);
+                homeViewModel.getText().observe(getViewLifecycleOwner(), searchResult::setText);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
