@@ -92,8 +92,6 @@ public class HomeFragment extends Fragment {
                 if (city != null) {
                     fieldSearchCity.setText(city);
                     mCity = city;
-                    url = String.format("https://api.openweathermap.org/data/2.5/weather?q=%s&APPID=%s&units=metric&lang=ru", mCity, key);
-                    new GetData().execute(url);
                 }
             }
 
@@ -113,6 +111,11 @@ public class HomeFragment extends Fragment {
             ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
         } else {
             startLocationUpdates();
+        }
+
+        if (mCity != null) {
+            url = String.format("https://api.openweathermap.org/data/2.5/weather?q=%s&APPID=%s&units=metric&lang=ru", mCity, key);
+            new GetData().execute(url);
         }
 
         return root;
