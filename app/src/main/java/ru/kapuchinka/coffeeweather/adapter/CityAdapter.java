@@ -30,7 +30,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import ru.kapuchinka.coffeeweather.utils.db.DBHelper;
 import ru.kapuchinka.coffeeweather.R;
@@ -182,6 +184,15 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
                 double tempFeelsLike = jsonObject.getJSONObject("main").getDouble("feels_like");
                 double tempMin = jsonObject.getJSONObject("main").getDouble("temp_min");
                 double tempMax = jsonObject.getJSONObject("main").getDouble("temp_max");
+                int humidity = jsonObject.getJSONObject("main").getInt("humidity");
+                long sunrise = jsonObject.getJSONObject("sys").getLong("sunrise");
+                Date sunriseDate = new Date(sunrise * 1000);
+                SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+                String formattedSunrise = sdf.format(sunriseDate);
+                long sunset = jsonObject.getJSONObject("sys").getLong("sunset");
+                Date sunsetDate = new Date(sunset * 1000);
+                String formattedSunset = sdf.format(sunsetDate);
+                double pressure = jsonObject.getJSONObject("main").getInt("pressure") * 0.750062;
                 String weather = jsonObject.getJSONArray("weather").getJSONObject(0).getString("description");
                 String weatherDescription = weather.substring(0, 1).toUpperCase() + weather.substring(1).toLowerCase();
                 String city = jsonObject.getString("name");
@@ -191,7 +202,11 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
                         "%s %.2f°C\n" +
                         "Ощущается как %.2f°C\n" +
                         "Минимальная температура %.2f°C\n" +
-                        "Максимальная температура %.2f°C\n", city, weatherDescription, temp, tempFeelsLike, tempMin, tempMax);
+                        "Максимальная температура %.2f°C\n" +
+                        "Влажность: %d%%\n" +
+                        "Давление: %.2f мм.рт.ст\n" +
+                        "Восход: %s\n" +
+                        "Закат: %s\n", city, weatherDescription, temp, tempFeelsLike, tempMin, tempMax, humidity, pressure, formattedSunrise, formattedSunset);
 
                 infoWeather.setText(resultWeather);
             } catch (JSONException e) {
