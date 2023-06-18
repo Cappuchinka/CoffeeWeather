@@ -1,11 +1,9 @@
-package ru.kapuchinka.coffeeweather.ui.dashboard;
+package ru.kapuchinka.coffeeweather.view;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,26 +21,17 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
-import ru.kapuchinka.coffeeweather.DBHelper;
+import ru.kapuchinka.coffeeweather.utils.db.DBHelper;
 import ru.kapuchinka.coffeeweather.R;
 import ru.kapuchinka.coffeeweather.adapter.CityAdapter;
-import ru.kapuchinka.coffeeweather.databinding.FragmentDashboardBinding;
+import ru.kapuchinka.coffeeweather.databinding.FragmentCitiesBinding;
+import ru.kapuchinka.coffeeweather.viewmodel.CitiesViewModel;
 
-public class DashboardFragment extends Fragment {
+public class CitiesFragment extends Fragment {
 
-    private FragmentDashboardBinding binding;
+    private FragmentCitiesBinding binding;
 
     private RecyclerView r_v_cities;
     private DBHelper DB;
@@ -57,10 +45,10 @@ public class DashboardFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        CitiesViewModel citiesViewModel =
+                new ViewModelProvider(this).get(CitiesViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentCitiesBinding.inflate(inflater, container, false);
         addButtonCity = binding.buttonAddCity;
         DB = new DBHelper(getActivity());
         cities = new ArrayList<>();

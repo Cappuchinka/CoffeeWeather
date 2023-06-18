@@ -1,14 +1,14 @@
-package ru.kapuchinka.coffeeweather.ui.notifications;
+package ru.kapuchinka.coffeeweather.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class NotificationsViewModel extends ViewModel {
+public class InfoViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public NotificationsViewModel() {
+    public InfoViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("CoffeeWeather\n" +
                 "API: Open Weather Map\n" +

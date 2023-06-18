@@ -1,4 +1,4 @@
-package ru.kapuchinka.coffeeweather;
+package ru.kapuchinka.coffeeweather.utils.db;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;

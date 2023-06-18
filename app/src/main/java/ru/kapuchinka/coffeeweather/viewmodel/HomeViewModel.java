@@ -1,4 +1,4 @@
-package ru.kapuchinka.coffeeweather.ui.home;
+package ru.kapuchinka.coffeeweather.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

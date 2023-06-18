@@ -15,7 +15,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -33,9 +32,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import ru.kapuchinka.coffeeweather.DBHelper;
+import ru.kapuchinka.coffeeweather.utils.db.DBHelper;
 import ru.kapuchinka.coffeeweather.R;
-import ru.kapuchinka.coffeeweather.ui.home.HomeFragment;
 
 public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
     private Context context;

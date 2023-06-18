@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="ru.kapuchinka.coffeeweather.ui.home.HomeFragment"
+        android:name="ru.kapuchinka.coffeeweather.view.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="ru.kapuchinka.coffeeweather.ui.dashboard.DashboardFragment"
+        android:id="@+id/navigation_cities"
+        android:name="ru.kapuchinka.coffeeweather.view.CitiesFragment"
         android:label="@string/title_cities"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_cities" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="ru.kapuchinka.coffeeweather.ui.notifications.NotificationsFragment"
+        android:id="@+id/navigation_info"
+        android:name="ru.kapuchinka.coffeeweather.view.InfoFragment"
         android:label="@string/title_info"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_info" />
 </navigation>
